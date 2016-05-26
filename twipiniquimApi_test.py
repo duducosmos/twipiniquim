@@ -12,8 +12,8 @@ class TestGetSentTweets(unittest.TestCase):
 
     def setUp(self):
 
-        self.tweetsSent = TwipiniquimApi(apiID='000000',
-                                         secretKey='000000')
+        self.tweetsSent = TwipiniquimApi(apiID='140304980380',
+                secretKey='8a170b254f967dbc31a8475ba56919329a66a0a90a21defe')
 
     def test_apiIDError(self):
         tw = TwipiniquimApi()
@@ -21,10 +21,35 @@ class TestGetSentTweets(unittest.TestCase):
         expected = {'error': 'apiID and secret key not defined'}
         self.assertDictEqual(expected, error)
 
+    def test_apiIDNotFounded(self):
+        tw = TwipiniquimApi(apiID='000000',
+                            secretKey='000000')
+        error = tw.sentFromKey('filme')
+        expected = {'error': 'Api ID not founded'}
+        self.assertDictEqual(expected, error)
+
+    def test_apiIDNotFounded(self):
+        tw = TwipiniquimApi(apiID='140304980380',
+                            secretKey='000000')
+        error = tw.sentFromKey('filme')
+        expected = {'error': 'Not valid Secret'}
+        self.assertDictEqual(expected, error)
+
     def test_sentFromKey(self):
         keyWord = 'filme'
-        expected = {'keyWord': 'filme', 'positivo': 10}
-        actual = self.tweetsSent.sentFromKey(keyWord)
+        expected = {'keyWord': 'filme', 'negativo':16}
+        actual = self.tweetsSent.sentFromKey(keyWord, testMode=1)
+        self.assertDictContainsSubset(expected, actual)
+
+    def test_sentFomKeyLocation(self):
+        keyWord = 'filme'
+
+        lat = -23.1774695
+        lng = -45.8789595
+        raio = 50
+
+        expected = {'keyWord': 'filme', 'positivo': 78, 'lat': '-23.1774695'}
+        actual = self.tweetsSent.sentFromKey(keyWord, lat, lng, raio, testMode=1)
         self.assertDictContainsSubset(expected, actual)
 
     def test_getSentTweets(self):

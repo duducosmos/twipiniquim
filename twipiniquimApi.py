@@ -27,7 +27,7 @@ class TwipiniquimApi:
                           data=data)
         return r.json()
 
-    def sentFromKey(self, keyWord):
+    def sentFromKey(self, keyWord, lat=None, lng=None, raio=None, testMode=0):
         """
         Return a json with the number of positive and negative tweets
         associated with a givem keyWord.
@@ -35,9 +35,21 @@ class TwipiniquimApi:
             keyWord: key word.
         """
 
-        data = {'apiID': self.apiID,
-                'secretKey': self.secretKey,
-                'keyWord': keyWord}
+        if(lat is not None and lng is not None and raio is not None):
+            data = {'apiID': self.apiID,
+                    'secretKey': self.secretKey,
+                    'keyWord': keyWord,
+                    'lat': lat,
+                    'lng': lng,
+                    'raio': raio,
+                    'testMode': testMode
+                    }
+        else:
+            data = {'apiID': self.apiID,
+                    'secretKey': self.secretKey,
+                    'keyWord': keyWord,
+                    'testMode': testMode
+                    }
 
         r = requests.post('http://localhost:8000/twipiniquim/default/api/sent.json',
                           data=data)
