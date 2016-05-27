@@ -8,9 +8,24 @@ import requests
 
 
 class TwipiniquimApi:
-    def __init__(self, apiID=None, secretKey=None):
+    def __init__(self, apiID, secretKey,
+                 tw_consumer_key=None,
+                 tw_consumer_secret=None,
+                 tw_access_token=None,
+                 tw_access_token_secret=None,
+                 localHost=False
+                 ):
         self.apiID = apiID
         self.secretKey = secretKey
+        self.tw_consumer_key = tw_consumer_key
+        self.tw_consumer_secret = tw_consumer_secret
+        self.tw_access_token = tw_access_token
+        self.tw_access_token_secret = tw_access_token_secret
+
+        if(localHost):
+            self.__enderecoApi = 'http://localhost:8000/twipiniquim/default/api/sent.json'
+        else:
+            self.__enderecoApi = 'http://web2py.edupereira.webfactional.com/twipiniquim/default/api/sent.json'
 
 
     def getSentTweets(self, tweets):
@@ -23,7 +38,7 @@ class TwipiniquimApi:
                 'secretKey': self.secretKey,
                 'tweets': tweets}
 
-        r = requests.post('http://localhost:8000/twipiniquim/default/api/sent.json',
+        r = requests.post(self.__enderecoApi,
                           data=data)
         return r.json()
 
@@ -50,7 +65,12 @@ class TwipiniquimApi:
                     'keyWord': keyWord,
                     'testMode': testMode
                     }
+        if(self.tw_consumer_key is not None):
+            data['tw_consumer_key'] = self.tw_consumer_key
+            data['tw_consumer_secret'] = self.tw_consumer_secret
+            data['tw_access_token'] = self.tw_access_token
+            data['tw_access_token_secret'] = self.tw_access_token_secret
 
-        r = requests.post('http://localhost:8000/twipiniquim/default/api/sent.json',
+        r = requests.post(self.__enderecoApi,
                           data=data)
         return r.json()

@@ -13,10 +13,15 @@ class TestGetSentTweets(unittest.TestCase):
     def setUp(self):
 
         self.tweetsSent = TwipiniquimApi(apiID='140304980380',
-                secretKey='8a170b254f967dbc31a8475ba56919329a66a0a90a21defe')
+    secretKey='e722d4016ed21759081bc53ff70629b29054d1144b30ba9b',
+    tw_consumer_key = 'HanTn77mONX8T29ZgraGuqB5E',
+    tw_consumer_secret = 'zY0z2mTEqSYQGScEUOynAbP4qPlFtPSjCQhnoHdaQW6LL7h1lN',
+    tw_access_token = '66704493-C6LfOHSoxVzcwL401VIU195lb5J6SQfprjN24Ixlu',
+    tw_access_token_secret = 'TiYTVM2irgPVS3toLPYSWKbSFzV8hz1JvZ0yj5NXwEiil'
+        )
 
     def test_apiIDError(self):
-        tw = TwipiniquimApi()
+        tw = TwipiniquimApi(apiID=None,secretKey=None)
         error = tw.sentFromKey('filme')
         expected = {'error': 'apiID and secret key not defined'}
         self.assertDictEqual(expected, error)
@@ -48,7 +53,7 @@ class TestGetSentTweets(unittest.TestCase):
         lng = -45.8789595
         raio = 50
 
-        expected = {'keyWord': 'filme', 'positivo': 78, 'lat': '-23.1774695'}
+        expected = {'keyWord': 'filme', 'positivo': 78, 'lat': -23.1774695}
         actual = self.tweetsSent.sentFromKey(keyWord, lat, lng, raio, testMode=1)
         self.assertDictContainsSubset(expected, actual)
 
