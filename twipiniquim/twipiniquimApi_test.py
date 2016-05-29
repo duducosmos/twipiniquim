@@ -12,8 +12,8 @@ class TestGetSentTweets(unittest.TestCase):
 
     def setUp(self):
         self.localHost = False
-        self.apiId = '140304980380',
-        self.secretKey ='e722d4016ed21759081bc53ff70629b29054d1144b30ba9b'
+        self.apiId = '253071546838',
+        self.secretKey ='c40b96499dbcb88ce6b59a3584adb1568f865a6f75104d0b'
         self.testMode = 1
 
         self.tweetsSent = TwipiniquimApi(apiID=self.apiId,
