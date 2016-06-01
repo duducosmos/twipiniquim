@@ -23,7 +23,7 @@ class TwipiniquimApi:
         self.tw_access_token_secret = tw_access_token_secret
 
         if(localHost):
-            self.__enderecoApi = 'http://localhost:8000/twipiniquim/default/api/sent.json'
+            self.__enderecoApi = 'http://localhost:8000/api/sent.json'
         else:
             self.__enderecoApi = 'http://www.twipiniquim.com/api/sent.json'
 
