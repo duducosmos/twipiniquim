@@ -13,14 +13,14 @@ datafiles = [(datadir, [f for f in glob.glob(os.path.join(datadir, '*'))])]
 
 
 setup(
-    name = "twipiniqui,",
+    name = "twipiniquimAPI",
     version = "0.1.0",
     author = "Eduardo dos Santos Pereira",
     author_email = "pereira.somoza@gmail.com",
     description = ("Api de analise de sentimentos de pt-BR"),
     license = "GNU v3",
     keywords = "computacao cognitiva",
-    url = "http://twipiniquim.jabuticabadigitalstudio.com/twipiniquim/",
+    url = "http://twipiniquim.com",
     packages= find_packages(),
     install_requires=['requests'],
     long_description=read('README'),
