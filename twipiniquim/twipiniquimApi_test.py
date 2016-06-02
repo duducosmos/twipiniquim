@@ -73,7 +73,18 @@ class TestGetSentTweets(unittest.TestCase):
         result = {u'message': u'POST'}
 
         tweets = ['eu odeio esse filme :(', 'odeio essa bosta de film :@',
-                  'eu amo esse filme meu deus sempre choro com ele']
+                  'eu amo esse filme meu deus sempre choro com ele',
+                  'RT @marcobonzanini: apenas  um  exemplo! :D http://example.com #NLP',
+                  'que merda de filme',
+                  'filme muuuuuito bom 44',
+                  'eu odeio esse filme',
+                  'Amei esse filme',
+                  'que filme chato',
+                  'adorei ver aquele filme com voce',
+                  'o filme foi mesmo incrivel',
+                  'Meu amigo que filme de merda',
+                  'ae io au amei o filme que do capitao america guerra civil que'
+                  ]
 
         expected = {'eu amo esse filme meu deus sempre choro com ele': 1,
                     'eu odeio esse filme :(': -1}
