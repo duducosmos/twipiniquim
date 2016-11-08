@@ -11,7 +11,10 @@ import json
 class TestGetSentTweets(unittest.TestCase):
 
     def setUp(self):
+        self.keyWord = 'filme'
         self.localHost = True
+        #if(self.localHost):
+        #    print("Running local host")
 
         self.apiId = '140304980380',
         self.secretKey ='e722d4016ed21759081bc53ff70629b29054d1144b30ba9b'
@@ -52,22 +55,22 @@ class TestGetSentTweets(unittest.TestCase):
         self.assertDictEqual(expected, error)
 
     def test_sentFromKey(self):
-        keyWord = 'filme'
-        expected = {'keyWord': 'filme', 'negativo':16}
+        keyWord = self.keyWord
+        expected = {u'positivo': 82}
         actual = self.tweetsSent.sentFromKey(keyWord, testMode=self.testMode)
-        self.assertDictContainsSubset(expected, actual)
+        self.assertDictContainsSubset(expected, actual['sent']['2016-Nov-04'])
 
     def test_sentFomKeyLocation(self):
-        keyWord = 'filme'
+        keyWord = self.keyWord
 
         lat = -23.1774695
         lng = -45.8789595
         raio = 50
 
-        expected = {'keyWord': 'filme', 'positivo': 78, 'lat': -23.1774695}
+        expected = {u'positivo': 82}
         actual = self.tweetsSent.sentFromKey(keyWord, lat, lng, raio,
                                              testMode=self.testMode)
-        self.assertDictContainsSubset(expected, actual)
+        self.assertDictContainsSubset(expected, actual['sent']['2016-Nov-04'])
 
     def test_getSentTweets(self):
         result = {u'message': u'POST'}
